@@ -13,26 +13,28 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('email')->unique();
+            $table->string('name', 255); // Sudah diperbaiki
+            $table->string('email', 255)->unique(); // Sudah diperbaiki
 
             $table->enum('role', ['admin', 'owner', 'customer'])->default('customer');
-            $table->string('phone')->nullable();
+            $table->string('phone', 255)->nullable(); // Sudah diperbaiki
 
             $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
+            $table->string('password', 255); // Sudah diperbaiki
             $table->rememberToken();
             $table->timestamps();
         });
 
+        // --- Perbaikan password_reset_tokens ---
         Schema::create('password_reset_tokens', function (Blueprint $table) {
-            $table->string('email')->primary();
-            $table->string('token');
+            $table->string('email', 255)->primary(); // PERBAIKAN
+            $table->string('token', 255); // PERBAIKAN
             $table->timestamp('created_at')->nullable();
         });
 
+        // --- Perbaikan sessions ---
         Schema::create('sessions', function (Blueprint $table) {
-            $table->string('id')->primary();
+            $table->string('id', 255)->primary(); // PERBAIKAN
             $table->foreignId('user_id')->nullable()->index();
             $table->string('ip_address', 45)->nullable();
             $table->text('user_agent')->nullable();
