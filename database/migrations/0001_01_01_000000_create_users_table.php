@@ -16,7 +16,6 @@ return new class extends Migration
             $table->string('name');
             $table->string('email')->unique();
 
-            // ✅ TAMBAHKAN KOLOM ROLE DAN PHONE DI SINI
             $table->enum('role', ['admin', 'owner', 'customer'])->default('customer');
             $table->string('phone')->nullable();
 
